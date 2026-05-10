@@ -80,3 +80,7 @@ kubectl apply -f k8s/
 For production, replace the single-node data services with managed or HA deployments and add secrets, network policies, and externalized schema migrations.
 
 # Event Driven E-Commerce Order Engine
+
+
+## Saga Orchestration Flow
+1. OrderCreated ➔ 2. ReserveInventory ➔ 3. ProcessPayment ➔ 4. OrderCompleted. Rejection triggers compensation pipelines.

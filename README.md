@@ -88,3 +88,7 @@ For production, replace the single-node data services with managed or HA deploym
 
 ## Kubernetes Guide
 Run `kubectl apply -f k8s/` to spin up Kafka, PostgreSQL, and reactive services.
+
+
+### Compensation state machine
+Failure logs trigger direct rollbacks in Kafka.

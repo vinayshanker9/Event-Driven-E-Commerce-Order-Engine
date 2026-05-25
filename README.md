@@ -84,3 +84,7 @@ For production, replace the single-node data services with managed or HA deploym
 
 ## Saga Orchestration Flow
 1. OrderCreated ➔ 2. ReserveInventory ➔ 3. ProcessPayment ➔ 4. OrderCompleted. Rejection triggers compensation pipelines.
+
+
+## Kubernetes Guide
+Run `kubectl apply -f k8s/` to spin up Kafka, PostgreSQL, and reactive services.

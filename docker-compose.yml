@@ -1,0 +1,91 @@
+services:
+  kafka:
+    image: bitnami/kafka:3.7
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_PROCESS_ROLES: broker,controller
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+
+  orders-db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: orders
+      POSTGRES_USER: orders
+      POSTGRES_PASSWORD: orders
+
+  payments-db:
+    image: postgres:16
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: payments
+      POSTGRES_USER: payments
+      POSTGRES_PASSWORD: payments
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+
+  zipkin:
+    image: openzipkin/zipkin:3
+    ports:
+      - "9411:9411"
+
+  order-service:
+    build:
+      context: .
+      dockerfile: order-service/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      POSTGRES_URL: jdbc:postgresql://orders-db:5432/orders
+      POSTGRES_USER: orders
+      POSTGRES_PASSWORD: orders
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    depends_on:
+      - kafka
+      - orders-db
+      - zipkin
+
+  inventory-service:
+    build:
+      context: .
+      dockerfile: inventory-service/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      MONGODB_URI: mongodb://mongo:27017/inventory
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    depends_on:
+      - kafka
+      - mongo
+      - zipkin
+
+  payment-service:
+    build:
+      context: .
+      dockerfile: payment-service/Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      POSTGRES_URL: jdbc:postgresql://payments-db:5432/payments
+      POSTGRES_USER: payments
+      POSTGRES_PASSWORD: payments
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    depends_on:
+      - kafka
+      - payments-db
+      - zipkin

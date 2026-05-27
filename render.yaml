@@ -3,7 +3,7 @@ services:
   - type: web
     name: order-service
     runtime: docker
-    dockerfilePath: ./order-service/Dockerfile
+    dockerfilePath: ./Dockerfile.order
     dockerContext: .
     envVars:
       - key: POSTGRES_URL
@@ -14,15 +14,13 @@ services:
         sync: false
       - key: KAFKA_BOOTSTRAP_SERVERS
         sync: false
-      - key: PORT
-        value: "8081"
     healthCheckPath: /actuator/health
 
   # ── Inventory Service ──────────────────────────────────────────────────────
   - type: web
     name: inventory-service
     runtime: docker
-    dockerfilePath: ./inventory-service/Dockerfile
+    dockerfilePath: ./Dockerfile.inventory
     dockerContext: .
     envVars:
       - key: POSTGRES_URL
@@ -33,15 +31,13 @@ services:
         sync: false
       - key: KAFKA_BOOTSTRAP_SERVERS
         sync: false
-      - key: PORT
-        value: "8082"
     healthCheckPath: /actuator/health
 
   # ── Payment Service ────────────────────────────────────────────────────────
   - type: web
     name: payment-service
     runtime: docker
-    dockerfilePath: ./payment-service/Dockerfile
+    dockerfilePath: ./Dockerfile.payment
     dockerContext: .
     envVars:
       - key: POSTGRES_URL
@@ -52,6 +48,4 @@ services:
         sync: false
       - key: KAFKA_BOOTSTRAP_SERVERS
         sync: false
-      - key: PORT
-        value: "8083"
     healthCheckPath: /actuator/health

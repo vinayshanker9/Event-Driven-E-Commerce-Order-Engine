@@ -2,6 +2,11 @@
 
 A fault-tolerant Spring Boot microservices scaffold that separates Order, Inventory, and Payment domains. The Order service coordinates a saga through Kafka commands and replies, while Inventory and Payment own their own persistence.
 
+## 🚀 Live Deployments
+
+- **Distributed Rate Limiter API Gateway**: [https://distributed-rate-limiter-api-gateway-production.up.railway.app](https://distributed-rate-limiter-api-gateway-production.up.railway.app)
+- **Order Service**: [https://order-service-4fge.onrender.com](https://order-service-4fge.onrender.com)
+
 ## Architecture
 
 ```mermaid

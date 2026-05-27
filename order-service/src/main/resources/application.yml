@@ -8,10 +8,22 @@ spring:
     url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/orders}
     username: ${POSTGRES_USER:orders}
     password: ${POSTGRES_PASSWORD:orders}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 2
+      minimum-idle: 1
+      initialization-fail-timeout: 30000
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     consumer:
@@ -41,3 +53,10 @@ management:
     web:
       exposure:
         include: health,info,prometheus
+
+logging:
+  level:
+    root: INFO
+    com.zaxxer.hikari: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG

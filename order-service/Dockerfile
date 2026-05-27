@@ -1,9 +1,19 @@
+# ── Stage 1: Build ──────────────────────────────────────────────────────────
 FROM gradle:8.10-jdk21 AS build
 WORKDIR /workspace
-COPY . .
-RUN gradle :order-service:bootJar --no-daemon
 
+# Copy only Gradle wrapper and build files first for better layer caching
+COPY gradlew gradlew.bat settings.gradle build.gradle ./
+COPY gradle ./gradle
+COPY common ./common
+COPY order-service ./order-service
+
+# Make gradlew executable and build
+RUN chmod +x gradlew && ./gradlew :order-service:bootJar --no-daemon -x test
+
+# ── Stage 2: Runtime ─────────────────────────────────────────────────────────
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /workspace/order-service/build/libs/order-service-0.1.0.jar app.jar
+COPY --from=build /workspace/order-service/build/libs/*.jar app.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

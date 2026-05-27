@@ -4,7 +4,7 @@ A fault-tolerant Spring Boot microservices scaffold that separates Order, Invent
 
 ## 🚀 Live Deployments
 
-- **Distributed Rate Limiter API Gateway**: [https://distributed-rate-limiter-api-gateway-production.up.railway.app](https://distributed-rate-limiter-api-gateway-production.up.railway.app)
+
 - **Order Service**: [https://order-service-4fge.onrender.com](https://order-service-4fge.onrender.com)
 
 ## Architecture

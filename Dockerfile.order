@@ -11,7 +11,7 @@ COPY common ./common
 COPY order-service ./order-service
 
 # Build the fat JAR (skip tests for faster CI builds)
-RUN chmod +x gradlew && ./gradlew :order-service:bootJar --no-daemon -x test
+RUN gradle :order-service:bootJar --no-daemon -x test
 
 # ── Stage 2: Runtime ─────────────────────────────────────────────────────────
 FROM eclipse-temurin:21-jre-jammy

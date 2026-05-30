@@ -2,3 +2,4 @@
 2026-05-27T23:23:06 - docs: update setup prerequisites in main documentation
 2026-05-28T10:05:12 - feat: add custom validation for order SKU formats
 2026-05-29T10:00:01 - fix: resolve race condition in database transactional lock
+2026-05-30T11:46:55.534586 - test: add integration test for full order compensation flow

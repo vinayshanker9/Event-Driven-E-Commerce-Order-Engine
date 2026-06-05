@@ -5,3 +5,4 @@
 2026-05-30T11:46:55.534586 - test: add integration test for full order compensation flow
 2026-06-01T20:48:25.004384 - test: add unit tests for Kafka partition routing key generator
 2026-06-02T18:54:11.421056 - docs: document saga orchestrator happy path and failure scenarios
+2026-06-05T21:32:17.037223 - feat: introduce idempotent message consumer pattern for orders

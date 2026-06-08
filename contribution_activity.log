@@ -6,3 +6,4 @@
 2026-06-01T20:48:25.004384 - test: add unit tests for Kafka partition routing key generator
 2026-06-02T18:54:11.421056 - docs: document saga orchestrator happy path and failure scenarios
 2026-06-05T21:32:17.037223 - feat: introduce idempotent message consumer pattern for orders
+2026-06-08T22:07:12.117540 - docs: document saga orchestrator happy path and failure scenarios

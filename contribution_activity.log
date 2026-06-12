@@ -9,3 +9,4 @@
 2026-06-08T22:07:12.117540 - docs: document saga orchestrator happy path and failure scenarios
 2026-06-09T12:43:17.542402 - feat: support distributed tracing using Zipkin and Micrometer
 2026-06-11T20:26:08.241962 - style: standardize logging formats across all modules
+2026-06-12T20:54:17.549645 - style: clean up redundant lombok annotations in DTOs

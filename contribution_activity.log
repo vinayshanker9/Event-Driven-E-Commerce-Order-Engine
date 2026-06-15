@@ -11,3 +11,4 @@
 2026-06-11T20:26:08.241962 - style: standardize logging formats across all modules
 2026-06-12T20:54:17.549645 - style: clean up redundant lombok annotations in DTOs
 2026-06-13T18:04:18.985705 - feat: support distributed tracing using Zipkin and Micrometer
+2026-06-15T13:48:22.003180 - docs: add local kubernetes deployment guide to README
